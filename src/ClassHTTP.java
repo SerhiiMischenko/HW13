@@ -79,9 +79,10 @@ public class ClassHTTP {
         System.out.println(response.statusCode());
     }
 
-    public static void getByName(String name) throws IOException, InterruptedException {
-        Document document = Jsoup.connect("https://jsonplaceholder.typicode.com/users").get();
-        Elements elements = document.select("img");
-        System.out.println(elements);
+    public static void getByName(String name) throws IOException {
+        String document = Jsoup.connect("https://jsonplaceholder.typicode.com/users").ignoreContentType(true).execute().body();
+
+
+        System.out.println(document);
     }
 }
