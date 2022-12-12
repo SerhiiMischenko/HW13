@@ -1,10 +1,13 @@
-import java.io.File;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
 
@@ -16,7 +19,8 @@ public class ClassHTTP {
         //createNewObject();
         //updateObject();
         //getUsers();
-        deleteObject();
+        //deleteObject();
+        getByName("Bret");
     }
 
     public static void createNewObject() throws IOException, InterruptedException {
@@ -73,5 +77,11 @@ public class ClassHTTP {
                 httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         System.out.println(response.statusCode());
+    }
+
+    public static void getByName(String name) throws IOException, InterruptedException {
+        Document document = Jsoup.connect("https://jsonplaceholder.typicode.com/users").get();
+        Elements elements = document.select("img");
+        System.out.println(elements);
     }
 }
