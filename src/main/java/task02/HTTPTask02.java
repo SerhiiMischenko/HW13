@@ -6,7 +6,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.jsoup.Jsoup;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class HTTPTask02 {
@@ -23,5 +25,12 @@ public class HTTPTask02 {
         String postId = String.valueOf(jo.get("postId"));
         String id = String.valueOf(jo.get("id"));
         String body = String.valueOf(jo.get("body"));
+        System.out.println("Comment is " + body + ".");
+        String fileName = "user-" + postId + "-post-" + id + "-comments.json";
+        File file = new File("/Users/serhiimischenko/IdeaProjects/HW13", fileName);
+        file.createNewFile();
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            writer.write(body);
+        }
     }
 }
